@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+
+	<title>Tetras</title>
+
+	<style type="text/css">
+		#background-canvas: {
+			position: absolute;
+			z-index: 0;
+		}
+
+		#forground-canvas: {
+			position: absolute;
+			z-index: 1;
+		}
+	</style>
+</head>
+<body>
+
+	<canvas id="background-canvas" width="640" height="480"></canvas>
+	<canvas id="forground-canvas" width="640" height="480">
+		Sorry, your browser is not compatible with HTML5 canvas.
+	</canvas>
+
+	<script type="text/javascript" data-main="./js/init" src="./lib/require.min.js"></script>
+
+</body>
+</html>
