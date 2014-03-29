@@ -2,9 +2,11 @@ define([
 	'../Shape'
 ], function (Shape) {
 
-	function Circle () {
+	function Circle (parameters) {
 
 		var circle = this;
+
+		Shape.call(this, parameters);
 
 		this.type = 'circle';
 
@@ -14,8 +16,14 @@ define([
 
 	}
 
+	Circle.prototype.render = Shape.prototype.render;
+
+	Circle.prototype.getNextCoordinates = Shape.prototype.getNextCoordinates;
+
 	Circle.prototype.preRender = function () {
-		var context = this.canvas.getContext('2d');
+
+		Shape.prototype.preRender.call(this);
+		var context = this.context;
 
 		context.beginPath();
 
@@ -28,7 +36,8 @@ define([
 			
 		context.closePath();
 		context.save();
-	}
+
+	};
 
 	return Circle;
 

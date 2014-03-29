@@ -1,50 +1,62 @@
 define([
-	'Config',
 	'ShapeFactory'
-], function (Config, ShapeFactory) {
+], function (ShapeFactory) {
 
 	function EventHandler (gameState) {
 
 		this.gameState = gameState;
 
-		this.createShapeOnClick();
+		this.eventListeners = {};
+
+		this.createShapeOnKeypress('A', 'triangle');
+
+		this.createShapeOnKeypress('W', 'square');
+
+		this.createShapeOnKeypress('D', 'circle');
+
+		this.onKeypress();
 
 	}
 
-	EventHandler.prototype.createShapeOnClick = function () {
+	EventHandler.prototype.createShapeOnKeypress = function (letter, type) {
 
-		var creationMaxTime = Config.creationMaxTime;
-		var lastCreationTime = Date.now();
-		var gameState = this.gameState;
-		var clickCounter = 0;
+		var charCode = letter.charCodeAt(0);
+		this.eventListeners[charCode] = type;
 
-		var creationTimeout;
-		var newCreationTime;
+	};
+
+	EventHandler.prototype.onKeypress = function () {
+
 		var shapeConstructor;
+		var keyCode;
 		var shape;
+		var type;
 
-		window.onclick = function (e) {
+		var me = this;
+		window.onkeyup = function (e) {
 
-			newCreationTime = Date.now();
+			keyCode = e.which;
+			type = me.eventListeners[keyCode];
 
-			shapeConstructor = ShapeFactory().newShape(clickCounter);
-			shape = new shapeConstructor();
+			if(type !== undefined) {
 
-			if(lastCreationTime - newCreationTime > creationMaxTime) {
+				shapeConstructor = (new ShapeFactory()).newShape(type);
+				shape = new shapeConstructor({
+					x: 50,
+					y: 50,
+					speed_y: 10,
+					speed_x: 10,
+					size: 100
+				});
 
-				clearTimeout(creationTimeout);
-				creationTimeout = setTimeout(function () {
+				console.log('Shape : ' + shape.type);
+				console.log(shape);
 
-					gameState.addShape(shape);
-					lastCreationTime = newCreationTime;
+				me.gameState.addShape(shape);
 
-				}, creationMaxTime);
 			}
 
-			clickCounter++;
-
 		};
-
 	};
 
 	return EventHandler;

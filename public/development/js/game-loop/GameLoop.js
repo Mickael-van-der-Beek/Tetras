@@ -30,16 +30,16 @@ define([
 			newTickTime = Date.now();
 			interval = lastTickTime - newTickTime;
 
-			gameState.nextState();
+			gameState.nextState(interval);
 
 			lastTickTime = newTickTime;
 
 			// When rendering engine is ready go to next loop tick
-			var gameLoop = this;
-			onNextFrame(function () {
-				gameLoop.loop();
-			});
+			onNextFrame(GameLoop);
 		};
+
+		GameLoop();
+
 	}
 
 	return GameLoop;

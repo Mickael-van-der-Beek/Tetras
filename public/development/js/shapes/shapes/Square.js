@@ -1,10 +1,12 @@
 define([
+	'../Shape'
+], function (Shape) {
 
-], function () {
-
-	function Square () {
+	function Square (parameters) {
 
 		var square = this;
+
+		Shape.call(this, parameters);
 
 		this.type = 'square';
 
@@ -14,8 +16,14 @@ define([
 
 	}
 
+	Square.prototype.render = Shape.prototype.render;
+
+	Square.prototype.getNextCoordinates = Shape.prototype.getNextCoordinates;
+
 	Square.prototype.preRender = function () {
-		var context = this.canvas.getContext('2d');
+
+		Shape.prototype.preRender.call(this);
+		var context = this.context;
 		
 		context.beginPath();
 
@@ -28,7 +36,8 @@ define([
 
 		context.closePath();
 		context.save();
-	}
+
+	};
 
 	return Square;
 

@@ -9,6 +9,7 @@ define([
 
 		this.canvas = canvas;
 		this.context = context;
+
 	}
 
 	return ForgroundGenerator;

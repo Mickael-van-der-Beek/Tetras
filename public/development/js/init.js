@@ -15,8 +15,9 @@ require.config({
 		Config: './config/Config',
 
 		// [Alias] Shapes
-		shapes: './shapes',
-		Shape: './shapes/ShapeFactory',
+		shapes: './shapes/shapes',
+		Shape: './shapes/Shape',
+		ShapeFactory: './shapes/ShapeFactory',
 
 		// [Alias] Game loop
 		game_loop: './game-loop',

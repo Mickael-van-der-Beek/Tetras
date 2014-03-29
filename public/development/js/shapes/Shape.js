@@ -20,11 +20,10 @@ define([
 		// Size / Diameter
 		this.size = parameters.size;
 
-		// Pre-rendering shape on canvas
+		// Pre-rendering shape on non-visible canvas
 		this.canvas = null;
 		this.preRender();
 
-		return this.canvas;
 	}
 
 	Shape.prototype.getNextCoordinates = function (interval) {
@@ -35,23 +34,26 @@ define([
 	};
 
 	Shape.prototype.preRender = function () {
-		var canvas = document.createElement('canvas');
+
+		var canvas = this.canvas = document.createElement('canvas');
+
 		canvas.width = this.size;
 		canvas.height = this.size;
-		var context = canvas.getContext('2d');
 
-		this.constructor.render(context);
-		this.canvas = canvas;
+		this.context = canvas.getContext('2d');
+
 	};
 
 	Shape.prototype.render = function (ShapeLayer, interval) {
-		context.fillRect(this.x, this.y, this.size, this.size);
+
+		ShapeLayer.context.fillRect(this.x, this.y, this.size, this.size);
 
 		var nextCoordinates = this.getNextCoordinates(interval);
 		this.x = nextCoordinates.x;
 		this.y = nextCoordinates.y;
 
-		context.drawImage(this.canvas, this.x, this.y);
+		ShapeLayer.context.drawImage(this.canvas, this.x, this.y);
+
 	};
 
 	return Shape;

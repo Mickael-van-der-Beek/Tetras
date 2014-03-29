@@ -16,7 +16,7 @@ require([
 		var BackgroundLayer = new BackgroundGenerator();
 		var ShapeLayer = new ForgroundGenerator();
 
-		var gameState = new GameState(ShapeLayer.context);
+		var gameState = new GameState(ShapeLayer);
 		GameLoop(gameState);
 
 		var eventHandler;

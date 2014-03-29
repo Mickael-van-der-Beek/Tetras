@@ -8,12 +8,6 @@ define([
 
 		var shapeFactory = this;
 
-		this.shapeList = [
-			'circle',
-			'square',
-			'triangle'
-		];
-
 		ShapeFactory = function () {
 			return shapeFactory;
 		};
@@ -36,9 +30,8 @@ define([
 
 	};
 
-	ShapeFactory.prototype.newShape = function (index) {
+	ShapeFactory.prototype.newShape = function (type) {
 
-		var type = this.shapeList[index % this.shapeList.length];
 		return this.constructor(type);
 
 	};

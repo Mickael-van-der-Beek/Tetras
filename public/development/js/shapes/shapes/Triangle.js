@@ -1,10 +1,12 @@
 define([
+	'../Shape'
+], function (Shape) {
 
-], function () {
-
-	function Triangle () {
+	function Triangle (parameters) {
 
 		var triangle = this;
+
+		Shape.call(this, parameters);
 
 		this.type = 'triangle';
 
@@ -14,9 +16,16 @@ define([
 
 	}
 
+	Triangle.prototype.render = Shape.prototype.render;
+
+	Triangle.prototype.getNextCoordinates = Shape.prototype.getNextCoordinates;
+
 	Triangle.prototype.preRender = function () {
-		var context = this.canvas.getContext('2d');
-		var h = side * (Math.sqrt(3)/2);
+
+		Shape.prototype.preRender.call(this);
+		var context = this.context;
+
+		var h = this.size * (Math.sqrt(3)/2);
 			
 		context.strokeStyle = "#ff0000";
 			
@@ -26,7 +35,7 @@ define([
 		context.beginPath();
 			
 			context.moveTo(0, -h / 2);
-			context.lineTo( -this.size / 2, h / 2);
+			context.lineTo(-this.size / 2, h / 2);
 			context.lineTo(this.size / 2, h / 2);
 			context.lineTo(0, -h / 2);
 	
@@ -38,7 +47,8 @@ define([
 			
 		context.closePath();
 		context.save();
-	}
+
+	};
 
 	return Triangle;
 
