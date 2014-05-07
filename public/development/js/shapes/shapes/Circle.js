@@ -27,7 +27,7 @@ define([
 
 		context.beginPath();
 
-			context.arc(this.x, this.y, this.size, 0, 2 * Math.PI, false);
+			context.arc(this.x, this.y, this.size / 2, 0, 2 * Math.PI, false);
 			context.fillStyle = 'yellow';
 			context.fill();
 			context.lineWidth = 7;

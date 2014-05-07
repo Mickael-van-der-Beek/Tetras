@@ -26,9 +26,9 @@ define([
 		var context = this.context;
 
 		var h = this.size * (Math.sqrt(3)/2);
-			
+
 		context.strokeStyle = "#ff0000";
-			
+
 		context.save();
 		context.translate(this.x, this.y);
 		
